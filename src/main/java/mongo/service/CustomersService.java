@@ -1,6 +1,7 @@
 package mongo.service;
 
 import mongo.dto.CustomerDTO;
+import mongo.enumerator.SortField;
 import mongo.exception.SaveEntityException;
 import mongo.mapper.Mapper;
 import mongo.model.Customer;
@@ -23,11 +24,11 @@ public class CustomersService implements CRUDService<CustomerDTO> {
     private Mapper<CustomerDTO, Customer> mapper;
 
     @Override
-    public List<CustomerDTO> findAll(Integer page, Integer size, String sort) {
+    public List<CustomerDTO> findAll(Integer page, Integer size, SortField sortField) {
 
         Integer optionalPage = Optional.ofNullable(page).orElse(10);
         Integer optionalSize = Optional.ofNullable(size).orElse(10);
-        String optionalPropertySort = Optional.ofNullable(sort).orElse("_id");
+        String optionalPropertySort = Optional.ofNullable(sortField).map(Enum::toString).orElse(SortField.id.toString());
 
         return customersRepository.findAll(PageRequest.of(optionalPage, optionalSize, Sort.by(optionalPropertySort)))
                 .map(mapper::toDto)

@@ -1,4 +1,4 @@
-package mongo;
+package mongo.enumerator;
 
 public enum OperatorEnum {
 

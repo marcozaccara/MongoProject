@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,10 +23,14 @@ public class CustomersSmartFilteringServiceImpl implements SmartFilteringService
     @Autowired
     private Mapper<CustomerDTO, Customer> mapper;
 
+    @Autowired
+    private CriteriaFactory criteriaFactory;
+
     @Override
     public List<CustomerDTO> filterByCriteria(List<FilterDTO> filters) {
-        return mongoTemplate.find(new Query(Criteria.where("address").ne("")), Customer.class)
-                .stream()
+        return filters.stream()
+                .map(f -> mongoTemplate.find(new Query(criteriaFactory.create(f)), Customer.class))
+                .flatMap(Collection::stream)
                 .map(mapper::toDto)
                 .collect(Collectors.toList());
     }

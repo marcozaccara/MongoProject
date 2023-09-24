@@ -3,7 +3,7 @@ package mongo.dto;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import mongo.OperatorEnum;
+import mongo.enumerator.OperatorEnum;
 
 @Builder
 @EqualsAndHashCode
