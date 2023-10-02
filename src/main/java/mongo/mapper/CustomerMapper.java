@@ -4,8 +4,13 @@ import mongo.dto.CustomerDTO;
 import mongo.model.Customer;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.util.Optional;
+
 @Component
-public class CustomerMapper implements Mapper<CustomerDTO, Customer> {
+public class CustomerMapper implements DtoMapper<CustomerDTO, Customer> {
     @Override
     public CustomerDTO toDto(Customer entity, Object... additionalInfo) {
         return CustomerDTO.builder()
@@ -14,6 +19,7 @@ public class CustomerMapper implements Mapper<CustomerDTO, Customer> {
                 .username(entity.getUsername())
                 .address(entity.getAddress())
                 .email(entity.getEmail())
+                .age(Optional.ofNullable(entity.getBirthdate()).map(this::calculateAgeFromDate).orElse(null))
                 .build();
     }
 
@@ -25,6 +31,13 @@ public class CustomerMapper implements Mapper<CustomerDTO, Customer> {
                 .username(dto.getUsername())
                 .address(dto.getAddress())
                 .email(dto.getEmail())
+                .birthdate(dto.getBirthDate())
                 .build();
+    }
+
+    private Integer calculateAgeFromDate(LocalDateTime date) {
+        LocalDate localDate = date.toLocalDate();
+        LocalDate localDateNow = LocalDateTime.now().toLocalDate();
+        return Period.between(localDate, localDateNow).getYears();
     }
 }

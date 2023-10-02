@@ -4,6 +4,8 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+
 
 @Builder
 @AllArgsConstructor
@@ -19,4 +21,5 @@ public class Customer implements Entity {
     private String name;
     private String address;
     private String email;
+    private LocalDateTime birthdate;
 }

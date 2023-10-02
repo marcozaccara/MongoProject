@@ -1,7 +1,7 @@
 package mongo.dto;
 
-/*
-DTO marker interface
+/**
+ * Dto marker interface
  */
 public interface Dto {
 }

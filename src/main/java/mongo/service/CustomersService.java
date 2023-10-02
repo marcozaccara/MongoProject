@@ -3,7 +3,7 @@ package mongo.service;
 import mongo.dto.CustomerDTO;
 import mongo.enumerator.SortField;
 import mongo.exception.SaveEntityException;
-import mongo.mapper.Mapper;
+import mongo.mapper.DtoMapper;
 import mongo.model.Customer;
 import mongo.repository.CustomersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,23 +21,22 @@ public class CustomersService implements CRUDService<CustomerDTO> {
     private CustomersRepository customersRepository;
 
     @Autowired
-    private Mapper<CustomerDTO, Customer> mapper;
+    private DtoMapper<CustomerDTO, Customer> mapper;
 
     @Override
-    public List<CustomerDTO> findAll(Integer page, Integer size, SortField sortField) {
+    public List<CustomerDTO> findAll(Integer size, SortField sortField) {
 
-        Integer optionalPage = Optional.ofNullable(page).orElse(10);
-        Integer optionalSize = Optional.ofNullable(size).orElse(10);
-        String optionalPropertySort = Optional.ofNullable(sortField).map(Enum::toString).orElse(SortField.id.toString());
+        Integer sizeValue = Optional.ofNullable(size).orElse(10);
+        String sortPropertyField = Optional.ofNullable(sortField).map(Enum::toString).orElse(SortField.id.toString());
 
-        return customersRepository.findAll(PageRequest.of(optionalPage, optionalSize, Sort.by(optionalPropertySort)))
+        return customersRepository.findAll(PageRequest.of(0, sizeValue, Sort.by(sortPropertyField)))
                 .map(mapper::toDto)
                 .toList();
     }
 
     @Override
     public CustomerDTO upsert(CustomerDTO customer) {
-        return Optional.of(customer)
+        return Optional.ofNullable(customer)
                 .map(mapper::toEntity)
                 .map(customersRepository::save)
                 .map(mapper::toDto).orElseThrow(() -> new SaveEntityException("Error during save customer"));

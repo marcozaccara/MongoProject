@@ -2,6 +2,7 @@ package mongo.service;
 
 import mongo.dto.FilterDTO;
 import mongo.enumerator.OperatorEnum;
+import mongo.model.CriteriaEntity;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Component;
 
@@ -13,10 +14,10 @@ import java.util.regex.Pattern;
 @Component
 public class CriteriaFactory {
 
-    public Criteria create(FilterDTO filterDto) {
-        Criteria criteria = new Criteria();
-        OperatorEnum operatorEnum = filterDto.getOperator();
-        Object value = filterDto.getValue();
+    public Criteria create(CriteriaEntity criteriaEntity) {
+        Criteria criteria = Criteria.where(criteriaEntity.getField());
+        OperatorEnum operatorEnum = criteriaEntity.getOperator();
+        Object value = criteriaEntity.getValue();
         if (OperatorEnum.NOT_EQUALS.equals(operatorEnum)) {
 
             return criteria.ne(value);

@@ -10,6 +10,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
+/**
+ * FailureResponse used as return object of controller methods.
+ */
 @Builder
 @Getter
 @ToString
