@@ -11,7 +11,7 @@ import java.util.List;
 
 
 /**
- * FailureResponse used as return object of controller methods.
+ * FailureResponse used as return object for View layer.
  */
 @Builder
 @Getter

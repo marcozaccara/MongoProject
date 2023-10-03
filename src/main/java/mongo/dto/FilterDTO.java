@@ -9,7 +9,7 @@ import mongo.enumerator.OperatorEnum;
 import javax.validation.constraints.NotNull;
 
 /**
- * Dto filter that contains {@link FieldEnum} field, {@link OperatorEnum} operator and value
+ * Dto class to represent a filter. Contains {@link FieldEnum} field, {@link OperatorEnum} operator and value
  */
 @Builder
 @EqualsAndHashCode

@@ -5,11 +5,18 @@ import mongo.enumerator.FieldEnum;
 import mongo.enumerator.OperatorEnum;
 import mongo.model.CriteriaEntity;
 import org.springframework.stereotype.Component;
+import utils.Constants;
 
 import java.time.LocalDateTime;
 
+import static utils.Constants.BIRTHDATE;
+
+/**
+ * Mapper to map {@link FilterDTO} to {@link CriteriaEntity}
+ */
 @Component
 public class CriteriaMapper implements EntityMapper<FilterDTO, CriteriaEntity> {
+
     @Override
     public CriteriaEntity toEntity(FilterDTO dto, Object... additionalInfo) {
         FieldEnum field = dto.getField();
@@ -21,7 +28,7 @@ public class CriteriaMapper implements EntityMapper<FilterDTO, CriteriaEntity> {
                     .build();
         }
         return CriteriaEntity.builder()
-                .field("birthdate")
+                .field(BIRTHDATE)
                 .operator(switchOperator(dto.getOperator()))
                 .value(calculateDateFromYear((Integer) dto.getValue()))
                 .build();

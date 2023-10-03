@@ -1,9 +1,14 @@
 package mongo.exception;
 
+import lombok.Getter;
 import mongo.validator.ValidationError;
 
 import java.util.List;
 
+/**
+ * Exception that wraps list of {@link ValidationError}
+ */
+@Getter
 public class CustomValidationException extends RuntimeException {
 
     private final List<ValidationError> errors;
@@ -13,7 +18,4 @@ public class CustomValidationException extends RuntimeException {
         this.errors = errors;
     }
 
-    public List<ValidationError> getErrors() {
-        return errors;
-    }
 }

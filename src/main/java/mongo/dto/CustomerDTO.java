@@ -10,6 +10,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+/**
+ * Dto class to represent Customer to View layer
+ */
 @Builder
 @EqualsAndHashCode
 @Getter
