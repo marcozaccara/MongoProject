@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CustomersService implements CRUDService<CustomerDTO> {
+public class CustomersService implements CRUDService<CustomerDTO, String> {
 
     @Autowired
     private CustomersRepository customersRepository;

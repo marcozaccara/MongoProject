@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 public class CustomersController {
 
     @Autowired
-    private CRUDService<CustomerDTO> customersService;
+    private CRUDService<CustomerDTO, String> customersService;
 
     @Autowired
     private SmartFilteringService<CustomerDTO> customersSmartFilteringService;
@@ -70,7 +70,9 @@ public class CustomersController {
         return ResponseEntity.noContent().build();
     }
 
-    @ApiOperation(value = "Filter customers with different criteria API")
+    @ApiOperation(value = "Filter customers with different criteria API. " +
+            "For field AGE operator must be: NOT_EQUALS, LESS_THAN, LESS_THAN_EQUALS, GREATER_THAN, GREATER_THAN_EQUALS." +
+            "for fields USERNAME, NAME, ADDRESS, EMAIL operator must be: EQUALS, NOT_EQUALS, IN, NOT_IN, MATCHES")
     @PostMapping("/smartFiltering")
     public ResponseEntity<List<CustomerDTO>> smartFiltering(@Valid @RequestBody List<FilterDTO> filters) {
         List<ValidationError> errors = filters.stream()

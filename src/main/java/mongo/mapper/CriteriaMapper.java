@@ -5,7 +5,6 @@ import mongo.enumerator.FieldEnum;
 import mongo.enumerator.OperatorEnum;
 import mongo.model.CriteriaEntity;
 import org.springframework.stereotype.Component;
-import utils.Constants;
 
 import java.time.LocalDateTime;
 

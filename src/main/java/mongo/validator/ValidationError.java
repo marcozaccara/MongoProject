@@ -4,6 +4,9 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+/**
+ * Validator pojo to represent a validation error
+ */
 @Builder
 @Getter
 @EqualsAndHashCode

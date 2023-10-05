@@ -1,7 +1,6 @@
 package mongo.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -19,7 +18,6 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CustomerDTO implements Dto {
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String id;
 
     @NotNull(message = "cannot be null")

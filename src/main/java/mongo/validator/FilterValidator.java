@@ -10,6 +10,9 @@ import java.util.*;
 import static mongo.enumerator.FieldEnum.*;
 import static mongo.enumerator.OperatorEnum.*;
 
+/**
+ * Validator to validate FilterDto for smart filtering
+ */
 @Component
 public class FilterValidator implements CustomValidator<FilterDTO> {
 
@@ -23,8 +26,22 @@ public class FilterValidator implements CustomValidator<FilterDTO> {
         List<ValidationError> errors = new ArrayList<>();
         FieldEnum fieldEnum = objectToValidate.getField();
         OperatorEnum operatorEnum = objectToValidate.getOperator();
+        Object value = objectToValidate.getValue();
         if (!(isOperationValidForStringField(fieldEnum, operatorEnum) || isOperationValidForNumericField(fieldEnum, operatorEnum))) {
             errors.add(ValidationError.builder().field(fieldEnum.toString()).error("operation not valid for this field").build());
+            return errors;
+        }
+        if (isOperationValidForStringField(fieldEnum, operatorEnum) && !(value instanceof String)) {
+            errors.add(ValidationError.builder().field(fieldEnum.toString()).error("value must be a string").build());
+        }
+
+        if (isOperationValidForNumericField(fieldEnum, operatorEnum) && !(value instanceof Number)) {
+            errors.add(ValidationError.builder().field(fieldEnum.toString()).error("value must be a number").build());
+            return errors;
+        }
+
+        if ((IN.equals(operatorEnum) || NOT_IN.equals(operatorEnum)) && !(value instanceof Collections)) {
+            errors.add(ValidationError.builder().field(fieldEnum.toString()).error("value must be a list").build());
             return errors;
         }
         return errors;

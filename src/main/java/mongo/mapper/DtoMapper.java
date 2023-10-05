@@ -5,6 +5,7 @@ import mongo.model.Entity;
 
 /**
  * Interface to map entity to dto
+ *
  * @param <D>
  * @param <E>
  */

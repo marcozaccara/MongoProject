@@ -37,7 +37,7 @@ class CustomersControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @MockBean
-    private CRUDService<CustomerDTO> customersService;
+    private CRUDService<CustomerDTO, String> customersService;
     @MockBean
     private SmartFilteringService<CustomerDTO> customersSmartFilteringService;
     @MockBean

@@ -9,6 +9,9 @@ import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.Optional;
 
+/**
+ * Mapper to map {@link Customer} entity to {@link CustomerDTO} and vice-versa
+ */
 @Component
 public class CustomerMapper implements DtoMapper<CustomerDTO, Customer> {
     @Override

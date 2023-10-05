@@ -1,6 +1,5 @@
 package mongo.service;
 
-import mongo.dto.FilterDTO;
 import mongo.enumerator.OperatorEnum;
 import mongo.model.CriteriaEntity;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.regex.Pattern;
 
 /**
- * Default Criteria is "is"
+ * Factory to instance different {@link Criteria} based on {@link OperatorEnum} in input
  **/
 @Component
 public class CriteriaFactory {

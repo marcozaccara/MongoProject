@@ -1,7 +1,8 @@
 package utils;
 
 public class Constants {
-    private Constants(){}
+    private Constants() {
+    }
 
     public static final String EMPTY_STRING = "";
     public static final String BIRTHDATE = "birthdate";
