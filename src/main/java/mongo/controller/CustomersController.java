@@ -1,9 +1,6 @@
 package mongo.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import mongo.dto.CustomerDTO;
 import mongo.dto.FilterDTO;
 import mongo.enumerator.SortField;
@@ -70,11 +67,12 @@ public class CustomersController {
         return ResponseEntity.noContent().build();
     }
 
-    @ApiOperation(value = "Filter customers with different criteria API. " +
-            "For field AGE operator must be: NOT_EQUALS, LESS_THAN, LESS_THAN_EQUALS, GREATER_THAN, GREATER_THAN_EQUALS." +
-            "for fields USERNAME, NAME, ADDRESS, EMAIL operator must be: EQUALS, NOT_EQUALS, IN, NOT_IN, MATCHES")
+    @ApiOperation(value = "Filter customers with different criteria API. ")
     @PostMapping("/smartFiltering")
-    public ResponseEntity<List<CustomerDTO>> smartFiltering(@Valid @RequestBody List<FilterDTO> filters) {
+    public ResponseEntity<List<CustomerDTO>> smartFiltering(@Valid
+                                                            @ApiParam(value = "For field AGE operator must be: NOT_EQUALS, LESS_THAN, LESS_THAN_EQUALS, GREATER_THAN, GREATER_THAN_EQUALS.\n" +
+                                                                    "For fields USERNAME, NAME, ADDRESS, EMAIL operator must be: EQUALS, NOT_EQUALS, IN, NOT_IN, MATCHES")
+                                                            @RequestBody List<FilterDTO> filters) {
         List<ValidationError> errors = filters.stream()
                 .map(filterDtoValidator::validate)
                 .flatMap(Collection::stream)

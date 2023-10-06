@@ -1,6 +1,7 @@
 package mongo.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -38,5 +39,6 @@ public class CustomerDTO implements Dto {
 
     private LocalDateTime birthDate;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Integer age;
 }

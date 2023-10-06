@@ -22,7 +22,7 @@ public class SwaggerConfig {
                 "REST APIs for Blog Application",
                 "1.0",
                 "Terms of service",
-                new Contact("Marco Zaccara", "", "marco.zaccara95@gmail.com"),
+                new Contact("Marco Zaccara", null, "marco.zaccara95@gmail.com"),
                 "License of API",
                 "API license URL",
                 Collections.emptyList());
